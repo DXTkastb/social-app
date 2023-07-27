@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1005092180447",
+    "project_id": "socio-be71a",
+    "storage_bucket": "socio-be71a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1005092180447:android:87f1a7316359ee4f52346a",
+        "android_client_info": {
+          "package_name": "com.example.socio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1005092180447-kfdsr66qt5e4vt54q0nec5ibg5nfj81k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFr446fGa5Zacc0SytB2j8GiqkHmzCE58"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1005092180447-kfdsr66qt5e4vt54q0nec5ibg5nfj81k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -23,15 +23,15 @@ class User {
 
 
   static final User _defaultUser = User(
-      username: 'Kaustubh',
-      accountname: 'dxtk',
-      profileurl: 'dxtk.jpg',
-      delegation: 'App Developer',
-      about: 'Hi! this is Kaustubh!. I love creating apps with FLutter',
-      link: 'www.link.com',
-      postsCount: 54,
-      followerCount: 134,
-      followingCount: 491);
+      username: '',
+      accountname: '',
+      profileurl: '',
+      delegation: '',
+      about: '',
+      link: '',
+      postsCount: 0,
+      followerCount: 0,
+      followingCount:0);
 
   static final User _defaultExternalUser = User(
       username: 'Artic Monkey',

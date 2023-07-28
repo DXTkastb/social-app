@@ -60,15 +60,19 @@ class RService {
     generalPort.send(errorData); // 0 : connection failure
   }
 
+  Future closeRsocketOnLogout() async {
+    if (initialized) {
+      initialized = false;
+      await (rsocket as RSocketRequester).close();
+    }
+  }
+
   void connectToRSocketServer(
     SendPort mIGSP,
   ) async {
     try {
+      await closeRsocketOnLogout();
       // for logout, new rsocket connection
-      if (initialized) {
-        initialized = false;
-        await (rsocket as RSocketRequester).close();
-      }
       rsocket = await RSocketConnector.create()
           .acceptor(requestResponseAcceptor((payload) {
         if (payload != null && notificationSendPort != null) {

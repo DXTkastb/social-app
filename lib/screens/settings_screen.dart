@@ -8,8 +8,10 @@ import 'package:socio/shared-prefs/shared_pref_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '/routes/router.dart';
+import '../change_notifiers/app_state_notifier.dart';
 import '../change_notifiers/user_data_notifier.dart';
 import '../change_notifiers/user_metadata_notifier.dart';
+import '../data/user_details.dart';
 import '../rest-service/rest_client.dart';
 
 enum ChangeType { USERNAME, LINK, INFO }
@@ -443,14 +445,16 @@ class _LogoutAlertBoxState extends State<LogoutAlertBox> {
     });
     await FirebaseMessaging.instance.deleteToken();
     await SharedPrefService.deleteAuthKey();
-    /*
-                Clear token key, providers
-             */
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     if (mounted) {
-      Navigator.of(context).pushNamedAndRemoveUntil(
-          AppRoutePaths.loginPageRoute, (route) => false);
+      var appStateProvider =
+          Provider.of<AppStateNotifier>(context, listen: false);
+      appStateProvider.fireLogoutState();
     }
+    // if (mounted) {
+    //   Navigator.of(context).pushNamedAndRemoveUntil(
+    //       AppRoutePaths.loginPageRoute, (route) => false);
+    // }
   }
 
   @override
@@ -533,8 +537,7 @@ class _ImageChangeAlertBoxState extends State<ImageChangeAlertBox> {
   }
 
   Future<String> changeProfileImage(String accountName) async {
-    return RestClient.changeDp(
-        accountName, profile_image!.path);
+    return RestClient.changeDp(accountName, profile_image!.path);
   }
 
   @override
@@ -607,8 +610,9 @@ class _ImageChangeAlertBoxState extends State<ImageChangeAlertBox> {
                   uploadState = true;
                 });
                 var appStateProvider =
-                Provider.of<UserMetaDataNotifier>(context, listen: false);
-                String num = await changeProfileImage(appStateProvider.accountName);
+                    Provider.of<UserMetaDataNotifier>(context, listen: false);
+                String num =
+                    await changeProfileImage(appStateProvider.accountName);
                 if (mounted) {
                   if (num.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -621,8 +625,8 @@ class _ImageChangeAlertBoxState extends State<ImageChangeAlertBox> {
                   });
                   await Future.delayed(const Duration(milliseconds: 400));
                   if (uploadStatus && mounted) {
-                    Provider.of<UserDataNotifier>(context, listen: false).refreshData(
-                        appStateProvider.accountName, 2, num);
+                    Provider.of<UserDataNotifier>(context, listen: false)
+                        .refreshData(appStateProvider.accountName, 2, num);
                     Navigator.of(context).pop();
                   }
                 }

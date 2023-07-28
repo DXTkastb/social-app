@@ -32,7 +32,6 @@ class MainIsolateEngine {
 
   Future<void> engineStart() async {
     Map<String, SendPort> ports = {};
-
     // ports['notifications_port'] = rNotification.sendPort;
     // ports['stories_port'] = rPostForStories.sendPort;
     // ports['posts_port'] = rPortForPosts.sendPort;
@@ -56,5 +55,9 @@ class MainIsolateEngine {
 
   void sendMessage(Map data) {
     helperIsolateSendPort!.send(data);
+  }
+
+  void interruptRscoket() {
+    helperIsolateSendPort!.send("RSOCKET_CLOSE_ON_LOGOUT");
   }
 }

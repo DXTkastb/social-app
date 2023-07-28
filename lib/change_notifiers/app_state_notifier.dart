@@ -48,7 +48,6 @@ class AppStateNotifier extends ChangeNotifier{
     }
   }
 
-
   void updateDataOnStarup(Map updateData){
     user.about = updateData['about'];
     user.link = updateData['link'];
@@ -65,6 +64,7 @@ class AppStateNotifier extends ChangeNotifier{
     _rConnect = null;
     _state = 2;
     user = User.getNullUser();
+    MainIsolateEngine.engine.interruptRscoket();
     notifyListeners();
   }
 

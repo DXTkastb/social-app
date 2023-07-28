@@ -13,8 +13,10 @@ Future<void> isolateEntry(Map<String, SendPort> ports) async {
     if (message is String) {
       switch (message) {
         case "RSOCKET_SETUP_CONNECTION":
-
           RService.rInstance.connectToRSocketServer(mainIsolateGeneralSendPort);
+          break;
+        case "RSOCKET_CLOSE_ON_LOGOUT":
+          RService.rInstance.closeRsocketOnLogout();
           break;
       }
     } else if (message is Map) {

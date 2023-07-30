@@ -483,7 +483,6 @@ Future<List<Comment>> fetchComments(
 
 Future<Map<String, dynamic>> fetchFollowerAccounts(
     RSocket rSocketRequester, Map<String, dynamic> dataMap) async {
-  // rsocket.fetch.followers
   var payloadData = cbor.encode(
       FetchFFQuery(dataMap['accountName'], dataMap['lastAccountName']).toMap());
   CompositeMetadata compositeMetadata = CompositeMetadata(RSocketByteBuffer());
@@ -491,23 +490,22 @@ Future<Map<String, dynamic>> fetchFollowerAccounts(
 
   var response = await rSocketRequester.requestResponse!(Payload.from(
       compositeMetadata.toUint8Array(), getBytesDataFromCbor(payloadData)));
-
   var x = cbor.decode(response.data!.toList())!;
-  return {'data': (x as List<String>), 'queryNumber': dataMap['queryNumber']};
+  x = (x as List).map((e) => e as String).toList();
+  return {'data': (x), 'queryNumber': dataMap['queryNumber']};
 }
 
 Future<Map<String, dynamic>> fetchFolloweeAccounts(
     RSocket rSocketRequester, Map<String, dynamic> dataMap) async {
-  // rsocket.fetch.followers
   var payloadData = cbor.encode(
       FetchFFQuery(dataMap['accountName'], dataMap['lastAccountName']).toMap());
   CompositeMetadata compositeMetadata = CompositeMetadata(RSocketByteBuffer());
   compositeMetadata.addMetadata(RoutingMetadata("rsocket.fetch.following", []));
   var response = await rSocketRequester.requestResponse!(Payload.from(
       compositeMetadata.toUint8Array(), getBytesDataFromCbor(payloadData)));
-
   var x = cbor.decode(response.data!.toList())!;
-  return {'data': (x as List<String>), 'queryNumber': dataMap['queryNumber']};
+  x = (x as List).map((e) => e as String).toList();
+  return {'data': (x), 'queryNumber': dataMap['queryNumber']};
 }
 
 /*

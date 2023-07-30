@@ -138,13 +138,18 @@ class SearchBoxResultsList extends StatelessWidget {
                     key: const Key('search-result-list'),
                     itemCount: data.length,
                     itemBuilder: (ctx2, index) {
+                      var currentUserProvider = Provider.of<UserMetaDataNotifier>(ctx, listen: false);
+                      String blockName = "";
+                      bool gesture = data[index].accountname!.compareTo(currentUserProvider.accountName) == 0;
+                      if(gesture) blockName = " (You)";
                       return GestureDetector(
                         onTap: () {
+                          if(gesture) return;
                           Navigator.of(ctx2).pushNamed(
                               AppRoutePaths.externalUserViewRoute,
-                              arguments: data[index]).then((value) {
+                              arguments: data[index].accountname).then((value) {
                                 if(value!=null && ctx.mounted){
-                                  Provider.of<UserMetaDataNotifier>(ctx, listen: false).refreshMetaData();
+                                 currentUserProvider.refreshMetaData();
                                 }
                           });
                         },
@@ -166,7 +171,7 @@ class SearchBoxResultsList extends StatelessWidget {
                                 width: 5,
                               ),
                               Text(
-                                data[index].accountname!,
+                                data[index].accountname!+blockName,
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 15),
                               )

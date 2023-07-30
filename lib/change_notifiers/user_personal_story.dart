@@ -42,7 +42,6 @@ class UserPersonalStoryNotifier extends ChangeNotifier {
 //   int timeEpoch = DateTime.now().millisecondsSinceEpoch~/1000;
 //   var output = port.first;
 //
-//   print('fetching user current stpries');
 //
 //   MainIsolateEngine.engine.sendMessage({
 //     'operation': 'FETCH_USER_CURRENT_STORIES',

@@ -11,8 +11,4 @@ class UserStory {
     unSeenStoriesId = map['unseenStoriesCount']??{};
   }
 
-  void printData() {
-    print(stories);
-    print(unSeenStoriesId);
-  }
 }

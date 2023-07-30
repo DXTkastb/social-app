@@ -116,7 +116,30 @@ class _FfsWidgetState extends State<FfsWidget> {
       height: 600,
       child: Column(
         children: [
-          Text((widget.type == 1) ? 'Followers' : 'Following'),
+          SizedBox(
+            height: 60,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Row(
+                children: [
+                  const Icon(
+                    Icons.people,
+                    color: Colors.deepPurple,
+                    size: 28,
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                    (widget.type == 1)?
+                    ' followers':
+                    ' following',
+                    style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 17),
+                  )
+                ],
+              ),
+            ),
+          ),
           Expanded(
               child: FutureBuilder(
             future: loadFuture,
@@ -146,6 +169,7 @@ class _FfsWidgetState extends State<FfsWidget> {
                     return true;
                   },
                   child: ListView.builder(
+                    padding: const EdgeInsets.only(left: 10,right: 10),
                       physics: const BouncingScrollPhysics(),
                       controller: scrollController,
                       prototypeItem: const SizedBox(
@@ -158,24 +182,20 @@ class _FfsWidgetState extends State<FfsWidget> {
                         if (index == length) {
                           child = const LoadMoreWidgetList();
                         } else {
-                          child = GestureDetector(
-                              onTap: () {
-                                // push to external user view
-                              },
-                              child: Row(
-                                children: [
-                                  GeneralAccountImage(accountName: accounts[index], size: 40,),
-                                  const SizedBox(
-                                    width: 7,
-                                  ),
-                                  Text(
-                                    accounts[index],
-                                    style: const TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w500),
-                                  )
-                                ],
-                              ));
+                          child = Row(
+                            children: [
+                              GeneralAccountImage(accountName: accounts[index], size: 40,),
+                              const SizedBox(
+                                width: 7,
+                              ),
+                              Text(
+                                accounts[index],
+                                style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500),
+                              )
+                            ],
+                          );
                         }
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 10),

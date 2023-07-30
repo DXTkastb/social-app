@@ -76,12 +76,12 @@ class _PostsLikeBottomSheetState extends State<PostsLikeBottomSheet> {
       height: 400,
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 60,
             child: Padding(
-              padding: const EdgeInsets.only(left: 20),
+              padding: EdgeInsets.only(left: 20),
               child: Row(
-                children: const [
+                children: [
                   Icon(
                     Icons.favorite,
                     color: Colors.deepPurple,

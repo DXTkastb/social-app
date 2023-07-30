@@ -22,7 +22,8 @@ class UploadPostView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var appProvider = Provider.of<UserDataNotifier>(context, listen: false);
+    var userDataProvider1 = Provider.of<UserMetaDataNotifier>(context, listen: false);
+    var userDataProvider2 = Provider.of<UserDataNotifier>(context, listen: false);
     return Provider<PostUploadModel>(
       create: (ctx) => PostUploadModel(),
       dispose: (ctx, value) => value.dispose(),
@@ -35,14 +36,14 @@ class UploadPostView extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const GeneralAccountImage(accountName: "dxtk", size: 55),
+                  GeneralAccountImage(accountName: userDataProvider1.accountName, size: 55),
                   const SizedBox(
                     width: 10,
                   ),
                   SizedBox(
                     child: Align(
                         alignment: Alignment.topCenter,
-                        child: Text(appProvider.username)),
+                        child: Text(userDataProvider2.username)),
                   ),
                   const Expanded(child: SizedBox()),
                   // const Icon(

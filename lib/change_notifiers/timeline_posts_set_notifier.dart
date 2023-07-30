@@ -65,11 +65,20 @@ class TimelinePostsNotifier extends ChangeNotifier {
           MainIsolateEngine.engine.rPostForPostsStream.listen((event) {
         if (!_disposed) {
           if (event.isEmpty) {
-
           } else {
             var x = event[0];
             // If new posts are loaded!
-            if (x.minIndex == -1) {
+            if(posts.isEmpty) {
+              posts.addAll(x.userPosts);
+              if(posts.length<30) canLoadMore = false;
+              minIndex = us.minIndex;
+              maxIndex = us.maxIndex;
+              notifyListeners();
+              Future(() {
+                updateTimer();
+              });
+            }
+            else if (x.minIndex == -1) {
               newPostsLoaded.addAll(x.userPosts);
               if (newPostsLoaded.isNotEmpty) {
                 maxIndex = x.maxIndex;
@@ -117,10 +126,10 @@ class TimelinePostsNotifier extends ChangeNotifier {
   void setNewTimer() {
     Duration duration;
     if (_userUploadedPost) {
-      duration = Duration.zero;
+      duration = const Duration(seconds: 2);
+      _userUploadedPost = false;
     } else {
       duration = const Duration(seconds: 5);
-      _userUploadedPost = false;
     }
     timer = Timer(duration, () {
       if (!_disposed) getNewData();
@@ -128,9 +137,8 @@ class TimelinePostsNotifier extends ChangeNotifier {
   }
 
   void uploadedNewPost() {
-    // if (newPostsLoaded.isNotEmpty) {
       _userUploadedPost = true;
-    // }
+      if(newPostsLoaded.isEmpty) updateTimer();
   }
 
   void updateTimer() {

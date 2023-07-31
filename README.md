@@ -16,11 +16,9 @@ Social Media App with features similar to Intagram
 
 #### user profile screen
 <img src="https://github.com/DXTkastb/social-app/assets/38028330/6cf5705f-ae3c-4b9a-b7e3-4075ecb8e42e" width="410" height="800">
-![Screenshot_2023-07-31-17-05-39-432_com example socio]()
 
 #### notification screen
 <img src="https://github.com/DXTkastb/social-app/assets/38028330/8951291a-b38d-414e-bf41-9addbc0bcaba" width="410" height="800">
-![Screenshot_2023-07-31-18-28-07-617_com example socio]()
 
 #### posts/story upload screen
 <img src="https://github.com/DXTkastb/social-app/assets/38028330/5124cb87-62bd-45f0-a6ce-2024e7cc8067" width="410" height="800">

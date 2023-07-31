@@ -147,7 +147,7 @@ class SearchBoxResultsList extends StatelessWidget {
                           if(gesture) return;
                           Navigator.of(ctx2).pushNamed(
                               AppRoutePaths.externalUserViewRoute,
-                              arguments: data[index].accountname).then((value) {
+                              arguments: data[index]).then((value) {
                                 if(value!=null && ctx.mounted){
                                  currentUserProvider.refreshMetaData();
                                 }

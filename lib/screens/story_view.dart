@@ -18,15 +18,11 @@ class StoryViewScreen extends StatelessWidget {
   const StoryViewScreen({super.key, required this.accountname,this.currentUserStories, this.memoryId,});
 
   String timeEpochToString(int time) {
-    if (time < 60000) {
-      return "${(time / 1000).toInt()}s";
-    }
-    else if(time < 3600000){
-      return "${(time / 60000).toInt()}m";
-    }
-    else {
-      return "${(time / 3600000).toInt()}h";
-    }
+    time = time ~/ 1000000;
+    int now = DateTime.now().millisecondsSinceEpoch;
+    int diff = DateTime.fromMillisecondsSinceEpoch(now - time).minute;
+    if(diff < 60) return  "$diff mn";
+    return "${diff~/60} hr";
   }
 
   @override
@@ -123,7 +119,7 @@ class StoryViewScreen extends StatelessWidget {
                                           timeEpochToString(time),
                                           style: const TextStyle(
                                               color: Colors.blueGrey,
-                                              fontSize: 18),
+                                              fontSize: 17.2),
                                         );
                                       }
                                       return const Text('');

@@ -193,9 +193,9 @@ class Notification extends StatelessWidget {
           (postID == null) ? const SizedBox() :
           GestureDetector(
               onTap: (){
-                Navigator.of(context).pushNamed(AppRoutePaths.postViewRoute,arguments : [false,35]);
+                Navigator.of(context).pushNamed(AppRoutePaths.postViewRoute,arguments : [false,postID]);
               },
-              child: const GeneralImageWidget(imageUrl: "",errorIcon: Icons.image_rounded, size: 40)),
+              child: GeneralImageWidget(imageUrl: "http://192.168.29.136:8080/post-image/wip/$postID",errorIcon: Icons.image_rounded, size: 40)),
         ],
       ),
     );

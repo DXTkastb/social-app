@@ -151,7 +151,8 @@ class _PostViewSubScreenState extends State<PostViewSubScreen> {
                 child: Stack(
                   children: [
                     Container(
-                      color: Colors.black,
+                      alignment: Alignment.center,
+                      color: const Color.fromRGBO(38, 31, 58, 1.0),
                       width: double.infinity,
                       child: Image.network(
                         'http://192.168.29.136:8080/post-image/${widget.post.imgurl}',
